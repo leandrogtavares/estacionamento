@@ -2,14 +2,15 @@ import { Bilhete } from "./bilhete.js"
 import { InvalidArgumentValue, InvalidArgumentType } from "../exception/exceptions.js"
 
 export class Estacionamento {
-    constructor(nome, tbodyControle) {
+    constructor(nome, tbodyControle, preBilhete) {
         this.nome = nome
         this._controle = [] //vetor de bilhetes. controle: Bilhete[]
         this.tbodyControle = tbodyControle
+        this.preBilhete = preBilhete
     }
 
     adicionarBilhete(bilhete) {
-        //todo adicionar lógica de validação
+        //TODO adicionar lógica de validação
         if (!bilhete) throw new InvalidArgumentValue('Bilhete não pode ser nulo')
         if (!(bilhete instanceof Bilhete)) throw new InvalidArgumentType('Objeto deve ser um bilhete')
         this._controle.push(bilhete)
@@ -22,16 +23,35 @@ export class Estacionamento {
     }
 
     _adicionarTBodyRow(bilhete) {
+        const atualizarPreBilhete = () => {
+            this.preBilhete.innerHTML = `
+            <section>
+                <div>Placa: ${bilhete.placa}</div>
+                <div>Entrada: ${bilhete.entrada}</div>
+            </section>
+            `
+        }
+
+        const tdOption = document.createElement('td')
         const tdPlaca = document.createElement('td')
         const tdEntrada = document.createElement('td')
+
+        const inputRowControle = document.createElement('input')
+        inputRowControle.type = 'radio'
+        inputRowControle.value = bilhete.placa
+        inputRowControle.id = bilhete.placa
+        inputRowControle.addEventListener('click', atualizarPreBilhete)
+
+        tdOption.appendChild(inputRowControle)
 
         tdPlaca.textContent = bilhete.placa
         tdEntrada.textContent = bilhete.entrada
 
         const trBilhete = document.createElement('tr')
+        trBilhete.appendChild(tdOption)
         trBilhete.appendChild(tdPlaca)
         trBilhete.appendChild(tdEntrada)
 
-        tbodyControle.appendChild(trBilhete)
+        this.tbodyControle.appendChild(trBilhete)
     }
 }

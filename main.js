@@ -9,17 +9,21 @@ const buttonEntrar = document.querySelector("#buttonEntrar")
 
 buttonEntrar.addEventListener('click', entrar)
 
-const inputPlacaSaida = document.querySelector("#inputPlacaSaida")
-const buttonSair = document.querySelector("#buttonSair")
+const inputPlacaFiltro = document.querySelector("#inputPlacaFiltro")
+const buttonFiltrar = document.querySelector("#buttonFiltrar")
 
+buttonFiltrar.addEventListener('click', filtrar)
+
+//TODO limitar escopo
 const preBilhete = document.querySelector("#preBilhete")
+const buttonSair = document.querySelector("#buttonSair")
 const tbodyControle = document.querySelector('#tbodyControle')
 
 buttonSair.addEventListener('click', sair)
 
 
 // Mundo js
-const estacionamento = new Estacionamento('Meier1', tbodyControle)
+const estacionamento = new Estacionamento('Meier1', tbodyControle, preBilhete)
 const guarita = new Guarita('Ala leste', estacionamento)
 
 function entrar() {
@@ -30,7 +34,13 @@ function entrar() {
 
 function sair() {
     console.log('encerrando estadia')
-    const placa = inputPlacaSaida.value
+    const placa = BilheteSelecionado.placa //todo definir BilheteSelecionado
     const messagem = guarita.encerrarEstadia(placa)
     preBilhete.textContent = messagem
 }
+
+function filtrar() {
+    const placa = inputPlacaFiltro.value
+    console.log('aplicando filtros')
+}
+
