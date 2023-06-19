@@ -7,6 +7,7 @@ export class Estacionamento {
         this._controle = [] //vetor de bilhetes. controle: Bilhete[]
         this.tbodyControle = tbodyControle
         this.preBilhete = preBilhete
+        this.bilheteSelecionado = null
     }
 
     adicionarBilhete(bilhete) {
@@ -23,6 +24,7 @@ export class Estacionamento {
     }
 
     _adicionarTBodyRow(bilhete) {
+        
         const atualizarPreBilhete = () => {
             this.preBilhete.innerHTML = `
             <section>
@@ -30,6 +32,7 @@ export class Estacionamento {
                 <div>Entrada: ${bilhete.entrada}</div>
             </section>
             `
+            this.bilheteSelecionado = bilhete
         }
 
         const tdOption = document.createElement('td')
@@ -53,5 +56,20 @@ export class Estacionamento {
         trBilhete.appendChild(tdEntrada)
 
         this.tbodyControle.appendChild(trBilhete)
+    }
+
+    atualizarTbodyControleResultadoFiltro(bilhete) {
+        // 1- zerar conteúdo
+        tbodyControle.innerHTML = null
+        // 2- adicionar uma linha que reflita o bilhete
+        this._adicionarTBodyRow(bilhete)
+    }
+
+    carregarTabelaControle() {
+        // 1 - percorrer o array _controle
+        // 2 - adicionar uma linha na tabela controle para cada bilhete no array _controle
+        for(let bilhete of this._controle) {
+            this._adicionarTBodyRow(bilhete)
+        }
     }
 }

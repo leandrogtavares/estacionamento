@@ -9,18 +9,19 @@
 </head>
 
 <body>
-    <input type="text" id="inputPlacaEntrada" />
-    <button id="buttonEntrar">entrar</button>
+    <input type="text" id="inputPlacaIniciar" />
+    <button id="buttonIniciar">iniciar</button>
     <div style="display: flex; align-items: center;">
         <pre id="preBilhete" style="flex:1;border: solid 1px blue; min-height: 150px"></pre>
-        <button id="buttonSair" style="flex:0.1; height: 80px;">sair</button>
+        <button id="buttonEncerrar" style="flex:0.1; height: 80px;">encerrar</button>
     </div>
 
     <div style="display: flex; justify-content: center;margin-bottom: 15px;">
         <input type="text" id="inputPlacaFiltro" style="margin-right: 10px;"/>
         <button id="buttonFiltrar">filtrar</button>
+        <button id="buttonZerarFiltro">zerar filtro</button>
     </div>
-
+    <h2 style="text-align: center;">Bilhetes</h2>
     <table style="border: solid 1px black; width: 100%; text-align: center;" id="tableControle">
         <thead>
             <th>Selecionado</th>
@@ -28,6 +29,7 @@
             <th class="">Entrada</th>
         </thead>
         <tbody id="tbodyControle">
+           
         </tbody>
     </table>
 </body>
